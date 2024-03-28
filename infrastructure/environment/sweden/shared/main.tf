@@ -8,6 +8,7 @@ locals {
   rg_name  = "rg-shared-se-${random_id.random.hex}"
   acr_name = "acrsharedse${random_id.random.hex}"
   sa_name  = "sasharedse${random_id.random.hex}"
+  law_name = "lawsharedse${random_id.random.hex}"
   location = "swedencentral"
 }
 
@@ -40,4 +41,12 @@ resource "azurerm_storage_container" "sac" {
   name                  = "tfstate"
   storage_account_name  = azurerm_storage_account.sa.name
   container_access_type = "private"
+}
+
+# log analytics workspace
+resource "azurerm_log_analytics_workspace" "law" {
+  name                = local.law_name
+  location            = local.location
+  resource_group_name = azurerm_resource_group.rg.name
+  sku                 = "PerGB2018"
 }
