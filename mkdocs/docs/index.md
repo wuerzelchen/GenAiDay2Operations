@@ -9,6 +9,19 @@ This repository serves the purpose of providing an example for a full project st
             index.md  # The documentation homepage.
             ...       # Other markdown pages, images and other files.
 
+## First things first
+1. Enable gpgsign = true in either the .git/config file or globally in the .gitconfig file.
+> This is needed, since this repo does not allow unsigned commits.
+```bash
+[commit]
+    gpgSign = true
+```
+2. Do the same for the tag signing.
+```bash
+[tag]
+    gpgSign = true
+```
+
 ## Build the documentation and push it to the gh-pages folder
 
 ```bash
