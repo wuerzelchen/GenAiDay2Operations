@@ -1,6 +1,2 @@
 # Documentation
-## Setup
-1. create a virtual environment
-2. activate the virtual environment
-3. install python 3.11
-
+You can find the documentation for this repository here: [Documentation](https://wuerzelchen.github.io/GenAiDay2Operations/)
