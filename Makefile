@@ -31,7 +31,8 @@ apply:
 			mv -f terraform.tfvars $(BASEDIR)/$$dir; \
 			cd $(BASEDIR); \
 			echo "Applying in $$dir"; \
-			cd $$dir && terraform init && terraform apply -auto-approve; \
+			[ -f $$dir/backend.tfvars ] || (echo "Please execute make apply-init before applying the environment" && exit 1); \
+			cd $$dir && terraform init -backend-config=backend.tfvars && terraform apply -auto-approve; \
 			cd $(BASEDIR); \
 		fi; \
 	done
@@ -56,7 +57,7 @@ apply-init:
 			echo "set storage_account_name to $$storage_account_name"; \
 			resource_group_name=$$(jq '.rg_name.value' $(OUTPUT)); \
 			echo "set resource_group_name to $$resource_group_name"; \
-			key=$$(basename $$(dirname $$dir)).$$(basename $$dir).tfstate; \
+			key="\"$$(basename $$(dirname $$dir)).$$(basename $$dir).tfstate"\"; \
 			echo "set key to $$key"; \
 			echo "Initializing in $$dir"; \
 			cd $$dir && echo "storage_account_name = $$storage_account_name" > backend.tfvars && echo "resource_group_name = $$resource_group_name" >> backend.tfvars && echo "key = $$key" >> backend.tfvars; \
