@@ -242,6 +242,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#first-things-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      First things first
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#build-the-documentation-and-push-it-to-the-gh-pages-folder" class="md-nav__link">
     <span class="md-ellipsis">
       Build the documentation and push it to the gh-pages folder
@@ -294,6 +303,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#first-things-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      First things first
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#build-the-documentation-and-push-it-to-the-gh-pages-folder" class="md-nav__link">
     <span class="md-ellipsis">
       Build the documentation and push it to the gh-pages folder
@@ -327,8 +345,35 @@
         index.md  # The documentation homepage.
         ...       # Other markdown pages, images and other files.
 </code></pre>
+<h2 id="first-things-first">First things first</h2>
+<ol>
+<li>Enable gpgsign = true in either the .git/config file or globally in the .gitconfig file.<blockquote>
+<p>This is needed, since this repo does not allow unsigned commits.</p>
+</blockquote>
+</li>
+</ol>
+<pre><code class="language-bash">[commit]
+    gpgSign = true
+</code></pre>
+<ol>
+<li>Do the same for the tag signing.</li>
+</ol>
+<pre><code class="language-bash">[tag]
+    gpgSign = true
+</code></pre>
+<ol>
+<li>Initially apply the remote_state environment with the following command:</li>
+</ol>
+<pre><code class="language-bash">make apply-init
+</code></pre>
+<ol>
+<li>Apply the rest of the environments locally with the following command:</li>
+</ol>
+<pre><code class="language-bash">make apply
+</code></pre>
 <h2 id="build-the-documentation-and-push-it-to-the-gh-pages-folder">Build the documentation and push it to the gh-pages folder</h2>
-<pre><code class="language-bash">mkdocs build &amp;&amp; cp -R site/* ../docs/
+<pre><code class="language-bash">cd mkdocs
+mkdocs build &amp;&amp; cp -R site/* ../docs/
 </code></pre>
 
 

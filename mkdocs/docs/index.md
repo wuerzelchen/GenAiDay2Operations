@@ -22,8 +22,19 @@ This repository serves the purpose of providing an example for a full project st
     gpgSign = true
 ```
 
+3. Initially apply the remote_state environment with the following command:
+```bash
+make apply-init
+```
+
+4. Apply the rest of the environments locally with the following command:
+```bash
+make apply
+```
+
 ## Build the documentation and push it to the gh-pages folder
 
 ```bash
+cd mkdocs
 mkdocs build && cp -R site/* ../docs/
 ```
