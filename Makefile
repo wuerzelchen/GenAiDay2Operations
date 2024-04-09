@@ -42,7 +42,11 @@ apply-init:
 	@echo "BASEDIR: $(BASEDIR)"
 	# initialize storage account for terraform remote state
 	@echo "Initializing remote state..."
-	cd infrastructure/remote_state && terraform init && terraform apply -auto-approve
+	$(eval repo=$(shell bash -c "git config --get remote.origin.url | sed -n 's#.*:##;s/\.git$$//p'"))
+	$(eval TF_VAR_issuer=$(repo))
+	echo $(TF_VAR_issuer)
+	printenv
+	cd infrastructure/remote_state && terraform init && TF_VAR_issuer=$(TF_VAR_issuer) terraform apply -auto-approve
 	terraform output -json > terraform.output
 	$(eval OUTPUT=$(BASEDIR)/infrastructure/remote_state/terraform.output)
 	@echo "OUTPUT: $(OUTPUT)"
