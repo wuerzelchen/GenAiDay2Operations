@@ -17,3 +17,10 @@ resource "azurerm_federated_identity_credential" "fic" {
   parent_id           = azurerm_user_assigned_identity.workflowmsi.id
   subject             = local.fic_subject
 }
+
+resource "azurerm_role_assignment" "example" {
+  # scope as "/subscriptions/data.azurerm_client_config.current.subscription_id"
+  scope                = "/subscriptions/${data.azurerm_client_config.current.subscription_id}"
+  role_definition_name = "Contributor"
+  principal_id         = azurerm_user_assigned_identity.workflowmsi.principal_id
+}
