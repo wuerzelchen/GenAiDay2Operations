@@ -30,3 +30,6 @@ jobs:
             az account show -o table
             az group list -o table
             pwd 
+      - name: 'Plan Terraform for all environments'
+        run: |
+            make apply
