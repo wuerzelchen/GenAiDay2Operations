@@ -50,3 +50,10 @@ resource "azurerm_log_analytics_workspace" "law" {
   resource_group_name = azurerm_resource_group.rg.name
   sku                 = "PerGB2018"
 }
+
+# rbac role assignment for the current user as blob data reader
+resource "azurerm_role_assignment" "ra" {
+  scope                = azurerm_storage_account.sa.id
+  role_definition_name = "Storage Blob Data Reader"
+  principal_id         = data.azurerm_client_config.current.object_id
+}
