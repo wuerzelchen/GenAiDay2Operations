@@ -1,3 +1,4 @@
+**override.tf
 __pycache__
 .env
 .terraform
