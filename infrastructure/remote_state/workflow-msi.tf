@@ -27,3 +27,10 @@ resource "azurerm_role_assignment" "example" {
   # this sets the principal to the user assigned identity which gets the contributor role to the subscription(scope)
   principal_id = azurerm_user_assigned_identity.workflowmsi.principal_id
 }
+
+# role assignment for workflowmsi on storage account as blob reader
+resource "azurerm_role_assignment" "ra" {
+  scope                = azurerm_storage_account.sa.id
+  role_definition_name = "Storage Blob Data Reader"
+  principal_id         = azurerm_user_assigned_identity.workflowmsi.principal_id
+}
